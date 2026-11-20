@@ -1,31 +1,159 @@
 <!DOCTYPE html>
-<!-- A placeholder from the Home Sales template. Replace this file with your site's first page. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Under construction</title>
-  <!-- An empty icon, so the browser doesn't log an error looking for favicon.ico -->
+  <meta name="description" content="Median home sale prices across 18 college towns, calculated from the College-town home sales dataset.">
+  <title>Home sale prices in college towns</title>
   <link rel="icon" href="data:,">
   <style>
-    :root { color-scheme: light dark; }
-    body {
-      max-width: 40rem;
-      margin: 0 auto;
-      padding: 3rem 1rem;
-      font-family: system-ui, sans-serif;
-      line-height: 1.5;
-    }
-    footer { margin-top: 3rem; font-size: 0.875rem; opacity: 0.75; }
+    :root { color-scheme: light; --ink: #172d35; --muted: #52666c; --line: #d8e0df; --accent: #087e78; --paper: #fff; --wash: #f3f7f5; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--wash); color: var(--ink); font: 16px/1.55 system-ui, sans-serif; }
+    main { width: min(1040px, calc(100% - 2rem)); margin: 0 auto; padding: 3.5rem 0 4rem; }
+    .eyebrow { margin: 0 0 .45rem; color: var(--accent); font-size: .78rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { max-width: 700px; margin: 0; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1.08; letter-spacing: -.045em; }
+    .intro { max-width: 680px; margin: 1rem 0 2rem; color: var(--muted); font-size: 1.1rem; }
+    .card { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); box-shadow: 0 8px 28px #172d350c; }
+    .card-head { padding: 1.25rem 1.5rem .75rem; }
+    h2 { margin: 0; font-size: 1.2rem; }
+    .hint { margin: .2rem 0 0; color: var(--muted); font-size: .9rem; }
+    .chart-scroll { overflow-x: auto; padding: .5rem 1rem 1rem; }
+    svg { display: block; width: 100%; min-width: 700px; height: auto; }
+    .gridline { stroke: #e5ebea; stroke-width: 1; }
+    .axis-label { fill: #64777b; font: 12px system-ui, sans-serif; }
+    .bar-label { fill: #33494f; font: 12px system-ui, sans-serif; }
+    .bar-value { fill: #172d35; font: 700 12px system-ui, sans-serif; }
+    .bar { fill: var(--accent); }
+    .table-wrap { overflow-x: auto; border-top: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: .75rem 1.5rem; border-bottom: 1px solid #e8edec; }
+    th { color: var(--muted); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+    td:last-child, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .methods { margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-left: 4px solid var(--accent); background: #e8f1ee; border-radius: 0 10px 10px 0; }
+    .methods h2 { font-size: 1rem; }
+    .methods p { margin: .4rem 0 0; color: #3f555b; }
+    footer { margin-top: 2rem; color: var(--muted); font-size: .85rem; }
+    @media (max-width: 600px) { main { padding-top: 2rem; } th, td { padding: .65rem 1rem; } .card-head { padding-inline: 1rem; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>This site is under construction</h1>
-    <p>It will show findings from the College-town home sales dataset.</p>
+    <p class="eyebrow">College-town housing</p>
+    <h1>What does a home cost near campus?</h1>
+    <p class="intro">Median sale prices for homes sold in 18 college towns. Davis, California, and several North Carolina towns top the list; Urbana, Illinois, has the lowest median.</p>
+
+    <section class="card" aria-labelledby="chart-title">
+      <div class="card-head">
+        <h2 id="chart-title">Median sale price by city</h2>
+        <p class="hint">18 cities · sorted from highest to lowest · USD</p>
+      </div>
+      <div class="chart-scroll">
+        <svg id="price-chart" viewBox="0 0 900 650" role="img" aria-labelledby="chart-title chart-desc">
+          <desc id="chart-desc">Horizontal bar chart of median sale prices in 18 cities, sorted from highest to lowest.</desc>
+          <g id="chart-content">
+          <line class="gridline" x1="150" y1="17" x2="150" y2="612" />
+          <text class="axis-label" x="150" y="631" text-anchor="middle">$0</text>
+          <line class="gridline" x1="308.75" y1="17" x2="308.75" y2="612" />
+          <text class="axis-label" x="308.75" y="631" text-anchor="middle">$0.25m</text>
+          <line class="gridline" x1="467.5" y1="17" x2="467.5" y2="612" />
+          <text class="axis-label" x="467.5" y="631" text-anchor="middle">$0.5m</text>
+          <line class="gridline" x1="626.25" y1="17" x2="626.25" y2="612" />
+          <text class="axis-label" x="626.25" y="631" text-anchor="middle">$0.75m</text>
+          <line class="gridline" x1="785" y1="17" x2="785" y2="612" />
+          <text class="axis-label" x="785" y="631" text-anchor="middle">$1m</text>
+          <text class="bar-label" x="140" y="38" text-anchor="end">Davis, CA</text>
+          <rect class="bar" x="150" y="25" width="564.515" height="17" rx="4"><title>Davis, CA: $889,000</title></rect>
+          <text class="bar-value" x="721.515" y="38">$889,000</text>
+          <text class="bar-label" x="140" y="71" text-anchor="end">Pittsboro, NC</text>
+          <rect class="bar" x="150" y="58" width="556.886" height="17" rx="4"><title>Pittsboro, NC: $876,986</title></rect>
+          <text class="bar-value" x="713.886" y="71">$876,986</text>
+          <text class="bar-label" x="140" y="104" text-anchor="end">Chapel Hill, NC</text>
+          <rect class="bar" x="150" y="91" width="466.725" height="17" rx="4"><title>Chapel Hill, NC: $735,000</title></rect>
+          <text class="bar-value" x="623.725" y="104">$735,000</text>
+          <text class="bar-label" x="140" y="137" text-anchor="end">Charlottesville, VA</text>
+          <rect class="bar" x="150" y="124" width="390.525" height="17" rx="4"><title>Charlottesville, VA: $615,000</title></rect>
+          <text class="bar-value" x="547.525" y="137">$615,000</text>
+          <text class="bar-label" x="140" y="170" text-anchor="end">Middleton, WI</text>
+          <rect class="bar" x="150" y="157" width="387.985" height="17" rx="4"><title>Middleton, WI: $611,000</title></rect>
+          <text class="bar-value" x="544.985" y="170">$611,000</text>
+          <text class="bar-label" x="140" y="203" text-anchor="end">Carrboro, NC</text>
+          <rect class="bar" x="150" y="190" width="381.794" height="17" rx="4"><title>Carrboro, NC: $601,250</title></rect>
+          <text class="bar-value" x="538.794" y="203">$601,250</text>
+          <text class="bar-label" x="140" y="236" text-anchor="end">Ann Arbor, MI</text>
+          <rect class="bar" x="150" y="223" width="362.585" height="17" rx="4"><title>Ann Arbor, MI: $571,000</title></rect>
+          <text class="bar-value" x="519.585" y="236">$571,000</text>
+          <text class="bar-label" x="140" y="269" text-anchor="end">Newberry, FL</text>
+          <rect class="bar" x="150" y="256" width="279.397" height="17" rx="4"><title>Newberry, FL: $439,995</title></rect>
+          <text class="bar-value" x="436.397" y="269">$439,995</text>
+          <text class="bar-label" x="140" y="302" text-anchor="end">State College, PA</text>
+          <rect class="bar" x="150" y="289" width="273.050" height="17" rx="4"><title>State College, PA: $430,000</title></rect>
+          <text class="bar-value" x="430.050" y="302">$430,000</text>
+          <text class="bar-label" x="140" y="335" text-anchor="end">Madison, WI</text>
+          <rect class="bar" x="150" y="322" width="267.335" height="17" rx="4"><title>Madison, WI: $421,000</title></rect>
+          <text class="bar-value" x="424.335" y="335">$421,000</text>
+          <text class="bar-label" x="140" y="368" text-anchor="end">Savoy, IL</text>
+          <rect class="bar" x="150" y="355" width="255.715" height="17" rx="4"><title>Savoy, IL: $402,700</title></rect>
+          <text class="bar-value" x="412.715" y="368">$402,700</text>
+          <text class="bar-label" x="140" y="401" text-anchor="end">West Lafayette, IN</text>
+          <rect class="bar" x="150" y="388" width="241.237" height="17" rx="4"><title>West Lafayette, IN: $379,900</title></rect>
+          <text class="bar-value" x="398.236" y="401">$379,900</text>
+          <text class="bar-label" x="140" y="434" text-anchor="end">Athens, GA</text>
+          <rect class="bar" x="150" y="421" width="234.950" height="17" rx="4"><title>Athens, GA: $370,000</title></rect>
+          <text class="bar-value" x="391.950" y="434">$370,000</text>
+          <text class="bar-label" x="140" y="467" text-anchor="end">Gainesville, FL</text>
+          <rect class="bar" x="150" y="454" width="222.250" height="17" rx="4"><title>Gainesville, FL: $350,000</title></rect>
+          <text class="bar-value" x="379.250" y="467">$350,000</text>
+          <text class="bar-label" x="140" y="500" text-anchor="end">Iowa City, IA</text>
+          <rect class="bar" x="150" y="487" width="217.170" height="17" rx="4"><title>Iowa City, IA: $342,000</title></rect>
+          <text class="bar-value" x="374.170" y="500">$342,000</text>
+          <text class="bar-label" x="140" y="533" text-anchor="end">Lafayette, IN</text>
+          <rect class="bar" x="150" y="520" width="165.100" height="17" rx="4"><title>Lafayette, IN: $260,000</title></rect>
+          <text class="bar-value" x="322.100" y="533">$260,000</text>
+          <text class="bar-label" x="140" y="566" text-anchor="end">Champaign, IL</text>
+          <rect class="bar" x="150" y="553" width="152.400" height="17" rx="4"><title>Champaign, IL: $240,000</title></rect>
+          <text class="bar-value" x="309.400" y="566">$240,000</text>
+          <text class="bar-label" x="140" y="599" text-anchor="end">Urbana, IL</text>
+          <rect class="bar" x="150" y="586" width="145.987" height="17" rx="4"><title>Urbana, IL: $229,900</title></rect>
+          <text class="bar-value" x="302.986" y="599">$229,900</text>
+        </g>
+        </svg>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">City</th><th scope="col">State</th><th scope="col">Sales counted</th><th scope="col">Median sale price</th></tr></thead>
+          <tbody id="price-table">
+            <tr><td>Davis</td><td>CA</td><td>941</td><td>$889,000</td></tr>
+            <tr><td>Pittsboro</td><td>NC</td><td>92</td><td>$876,986</td></tr>
+            <tr><td>Chapel Hill</td><td>NC</td><td>2,716</td><td>$735,000</td></tr>
+            <tr><td>Charlottesville</td><td>VA</td><td>2,774</td><td>$615,000</td></tr>
+            <tr><td>Middleton</td><td>WI</td><td>645</td><td>$611,000</td></tr>
+            <tr><td>Carrboro</td><td>NC</td><td>208</td><td>$601,250</td></tr>
+            <tr><td>Ann Arbor</td><td>MI</td><td>3,020</td><td>$571,000</td></tr>
+            <tr><td>Newberry</td><td>FL</td><td>152</td><td>$439,995</td></tr>
+            <tr><td>State College</td><td>PA</td><td>1,350</td><td>$430,000</td></tr>
+            <tr><td>Madison</td><td>WI</td><td>5,061</td><td>$421,000</td></tr>
+            <tr><td>Savoy</td><td>IL</td><td>247</td><td>$402,700</td></tr>
+            <tr><td>West Lafayette</td><td>IN</td><td>1,559</td><td>$379,900</td></tr>
+            <tr><td>Athens</td><td>GA</td><td>2,813</td><td>$370,000</td></tr>
+            <tr><td>Gainesville</td><td>FL</td><td>5,477</td><td>$350,000</td></tr>
+            <tr><td>Iowa City</td><td>IA</td><td>1,909</td><td>$342,000</td></tr>
+            <tr><td>Lafayette</td><td>IN</td><td>3,057</td><td>$260,000</td></tr>
+            <tr><td>Champaign</td><td>IL</td><td>2,286</td><td>$240,000</td></tr>
+            <tr><td>Urbana</td><td>IL</td><td>1,131</td><td>$229,900</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="methods" aria-labelledby="methods-title">
+      <h2 id="methods-title">How the medians were calculated</h2>
+      <p>For each city, sale prices below $1,000 were excluded to remove the implausibly low values flagged in the dataset notes. The median is the middle price after sorting the remaining sales (or the average of the two middle prices when there is an even number of sales). Prices are displayed rounded to the nearest whole dollar; counts show the sales included.</p>
+    </section>
+
+    <footer>Source: College-town home sales dataset, version 1.0 (2026), collected March 2026. Values are as reported by the collection source and are not verified against county records.</footer>
   </main>
-  <footer>
-    <p>Data: College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies. Data collected March 2026.</p>
-  </footer>
+
 </body>
 </html>
