@@ -18,6 +18,7 @@
     .card-head { padding: 1.25rem 1.5rem .75rem; }
     h2 { margin: 0; font-size: 1.2rem; }
     .hint { margin: .2rem 0 0; color: var(--muted); font-size: .9rem; }
+    .price-rule { margin: .6rem 0 0; color: var(--muted); font-size: .9rem; }
     .chart-scroll { overflow-x: auto; padding: .5rem 1rem 1rem; }
     svg { display: block; width: 100%; min-width: 700px; height: auto; }
     .gridline { stroke: #e2ecf7; stroke-width: 1; }
@@ -47,11 +48,12 @@
     <section class="card" aria-labelledby="chart-title">
       <div class="card-head">
         <h2 id="chart-title">Median sale price by city</h2>
-        <p class="hint">18 cities · sorted from highest to lowest · USD</p>
+        <p class="hint">18 cities · 35,402 qualifying sales · sorted from highest to lowest · USD</p>
+        <p class="price-rule">Price rule: Sales under $10,000 are excluded. The median for each city is calculated from the remaining sale prices.</p>
       </div>
       <div class="chart-scroll">
         <svg id="price-chart" viewBox="0 0 900 650" role="img" aria-labelledby="chart-title chart-desc">
-          <desc id="chart-desc">Horizontal bar chart of median sale prices in 18 cities, sorted from highest to lowest.</desc>
+          <desc id="chart-desc">Horizontal bar chart of median sale prices in 18 cities, sorted from highest to lowest, using sales of $10,000 or more.</desc>
           <g id="chart-content">
           <line class="gridline" x1="150" y1="17" x2="150" y2="612" />
           <text class="axis-label" x="150" y="631" text-anchor="middle">$0</text>
@@ -79,11 +81,11 @@
           <rect class="bar" x="150" y="157" width="387.985" height="17" rx="4"><title>Middleton, WI: $611,000</title></rect>
           <text class="bar-value" x="544.985" y="170">$611,000</text>
           <text class="bar-label" x="140" y="203" text-anchor="end">Carrboro, NC</text>
-          <rect class="bar" x="150" y="190" width="381.794" height="17" rx="4"><title>Carrboro, NC: $601,250</title></rect>
-          <text class="bar-value" x="538.794" y="203">$601,250</text>
+          <rect class="bar" x="150" y="190" width="384.175" height="17" rx="4"><title>Carrboro, NC: $605,000</title></rect>
+          <text class="bar-value" x="541.175" y="203">$605,000</text>
           <text class="bar-label" x="140" y="236" text-anchor="end">Ann Arbor, MI</text>
-          <rect class="bar" x="150" y="223" width="362.585" height="17" rx="4"><title>Ann Arbor, MI: $571,000</title></rect>
-          <text class="bar-value" x="519.585" y="236">$571,000</text>
+          <rect class="bar" x="150" y="223" width="363.220" height="17" rx="4"><title>Ann Arbor, MI: $572,000</title></rect>
+          <text class="bar-value" x="520.220" y="236">$572,000</text>
           <text class="bar-label" x="140" y="269" text-anchor="end">Newberry, FL</text>
           <rect class="bar" x="150" y="256" width="279.397" height="17" rx="4"><title>Newberry, FL: $439,995</title></rect>
           <text class="bar-value" x="436.397" y="269">$439,995</text>
@@ -126,21 +128,21 @@
           <tbody id="price-table">
             <tr><td>Davis</td><td>CA</td><td>941</td><td>$889,000</td></tr>
             <tr><td>Pittsboro</td><td>NC</td><td>92</td><td>$876,986</td></tr>
-            <tr><td>Chapel Hill</td><td>NC</td><td>2,716</td><td>$735,000</td></tr>
+            <tr><td>Chapel Hill</td><td>NC</td><td>2,713</td><td>$735,000</td></tr>
             <tr><td>Charlottesville</td><td>VA</td><td>2,774</td><td>$615,000</td></tr>
             <tr><td>Middleton</td><td>WI</td><td>645</td><td>$611,000</td></tr>
-            <tr><td>Carrboro</td><td>NC</td><td>208</td><td>$601,250</td></tr>
-            <tr><td>Ann Arbor</td><td>MI</td><td>3,020</td><td>$571,000</td></tr>
+            <tr><td>Carrboro</td><td>NC</td><td>205</td><td>$605,000</td></tr>
+            <tr><td>Ann Arbor</td><td>MI</td><td>3,009</td><td>$572,000</td></tr>
             <tr><td>Newberry</td><td>FL</td><td>152</td><td>$439,995</td></tr>
-            <tr><td>State College</td><td>PA</td><td>1,350</td><td>$430,000</td></tr>
+            <tr><td>State College</td><td>PA</td><td>1,348</td><td>$430,000</td></tr>
             <tr><td>Madison</td><td>WI</td><td>5,061</td><td>$421,000</td></tr>
             <tr><td>Savoy</td><td>IL</td><td>247</td><td>$402,700</td></tr>
             <tr><td>West Lafayette</td><td>IN</td><td>1,559</td><td>$379,900</td></tr>
-            <tr><td>Athens</td><td>GA</td><td>2,813</td><td>$370,000</td></tr>
-            <tr><td>Gainesville</td><td>FL</td><td>5,477</td><td>$350,000</td></tr>
+            <tr><td>Athens</td><td>GA</td><td>2,809</td><td>$370,000</td></tr>
+            <tr><td>Gainesville</td><td>FL</td><td>5,469</td><td>$350,000</td></tr>
             <tr><td>Iowa City</td><td>IA</td><td>1,909</td><td>$342,000</td></tr>
-            <tr><td>Lafayette</td><td>IN</td><td>3,057</td><td>$260,000</td></tr>
-            <tr><td>Champaign</td><td>IL</td><td>2,286</td><td>$240,000</td></tr>
+            <tr><td>Lafayette</td><td>IN</td><td>3,053</td><td>$260,000</td></tr>
+            <tr><td>Champaign</td><td>IL</td><td>2,285</td><td>$240,000</td></tr>
             <tr><td>Urbana</td><td>IL</td><td>1,131</td><td>$229,900</td></tr>
           </tbody>
         </table>
@@ -149,7 +151,7 @@
 
     <section class="methods" aria-labelledby="methods-title">
       <h2 id="methods-title">How the medians were calculated</h2>
-      <p>For each city, sale prices below $1,000 were excluded to remove the implausibly low values flagged in the dataset notes. The median is the middle price after sorting the remaining sales (or the average of the two middle prices when there is an even number of sales). Prices are displayed rounded to the nearest whole dollar; counts show the sales included.</p>
+      <p>For each city, sale prices below $10,000 were excluded to apply the price rule stated above the chart. The median is the middle price after sorting the remaining sales (or the average of the two middle prices when there is an even number of sales). Prices are displayed rounded to the nearest whole dollar; counts show the sales included.</p>
     </section>
 
     <footer>Source: College-town home sales dataset, version 1.0 (2026), collected March 2026. Values are as reported by the collection source and are not verified against county records.</footer>
